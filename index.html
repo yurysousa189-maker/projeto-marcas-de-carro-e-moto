@@ -1,53 +1,273 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>Page Title</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Triumph Motorcycles - Loja Oficial</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: #fff;
+        }
+        header {
+            background: #000;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header img {
+            height: 50px;
+        }
+        nav ol {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ol li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .modelos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .card h3 {
+            margin: 10px 0 5px;
+            color: #ffcc00;
+        }
+        .price {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #0f0;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #ffaa00;
+        }
+        /* Carrinho */
+        #cart {
+            background: #222;
+            padding: 10px;
+            border-radius: 8px;
+            margin-right: 20px;
+            min-width: 250px;
+        }
+        #cart h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #ffcc00;
+        }
+        #cart ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px;
+            font-size: 14px;
+        }
+        #cart ul li {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cart ul li button {
+            background: red;
+            border: none;
+            color: white;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+        #cart-total {
+            font-weight: bold;
+            color: #0f0;
+        }
+        #checkout-btn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #checkout-btn:hover {
+            background: #ffaa00;
+        }
+        footer {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
-
 <header>
+    <img src="img4.png" alt="Triumph">
+
+    <!-- Carrinho -->
+    <div id="cart">
+        <h3>Carrinho 🛒 (<span id="cart-count">0</span>)</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="cart-total">R$ 0,00</span></p>
+        <button id="checkout-btn" onclick="checkout()">Finalizar Compra</button>
+    </div>
 
     <nav>
-
-<ol>
-<li><a href="https://www.bugatti.com/">BUGATTI</a></li>
-<li><a href="https://www.triumphmotorcycles.com.br">TIGER SPORT🏍️</a></li>
-<li><a href="https://www.bmw.com.br/">bmw⭕️⭕️\_____/⭕️⭕️</a></li>
-<li><a href="https://www.bmw-motorrad.com.br/">K1600</a></li>
-</ol>
-
+        <ol>
+            <li><a href="#banner">Home</a></li>
+            <li><a href="#modelos">Modelos</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ol>
     </nav>
-
 </header>
 
 <section id="banner">
-<img src="triumph_tiger_900_gt_aragon_lateral_direita.webp" alt="">
-     </section>
+    <img src="2020-triumph-tiger-900-gt-pro-review-adv-motorcycle-1.jpg" alt="">
+</section>
 
+<section id="modelos" class="modelos">
+    <div class="card">
+        <img src="img1.png" alt="Tiger 900 GT">
+        <h3>Tiger 900 GT</h3>
+        <p>Aventureira e confortável, feita para longas viagens.</p>
+        <p class="price">R$ 75.900</p>
+        <button class="btn" onclick="addToCart('Tiger 900 GT', 75900)">Comprar</button>
+    </div>
+    <div class="card">
+        <img src="img3.png" alt="Tiger 900 Rally Pro">
+        <h3>Tiger 900 Rally Pro</h3>
+        <p>Preparada para off-road extremo, com potência e resistência.</p>
+        <p class="price">R$ 82.500</p>
+        <button class="btn" onclick="addToCart('Tiger 900 Rally Pro', 82500)">Comprar</button>
+    </div>
+    <div class="card">
+        <img src="img5.png" alt="tiger sport">
+        <h3>Tiger sport</h3>
+        <p>Compacta, ágil e divertida para o dia a dia urbano.</p>
+        <p class="price">R$ 47.900</p>
+        <button class="btn" onclick="addToCart('Trident 660', 47900)">Comprar</button>
+    </div>
+</section>
 
+<footer id="contato">
+    <p>© 2025 Triumph Motorcycles Brasil | 
+       <a href="https://www.triumphmotorcycles.com.br" target="_blank">Site Oficial</a></p>
+</footer>
 
+<script>
+    let cartCount = 0;
+    let cartItems = [];
+    let cartTotal = 0;
 
+    function addToCart(model, price) {
+        cartCount++;
+        document.getElementById("cart-count").textContent = cartCount;
 
+        cartItems.push({ model, price });
+        cartTotal += price;
 
-<ul>
+        updateCart();
+    }
 
+    function removeFromCart(index) {
+        cartTotal -= cartItems[index].price;
+        cartItems.splice(index, 1);
+        cartCount--;
+        document.getElementById("cart-count").textContent = cartCount;
+        updateCart();
+    }
 
+    function updateCart() {
+        const cartList = document.getElementById("cart-items");
+        cartList.innerHTML = "";
+        cartItems.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.textContent = `${item.model} - R$ ${item.price.toLocaleString('pt-BR')}`;
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "❌";
+            removeBtn.onclick = () => removeFromCart(index);
+            li.appendChild(removeBtn);
+            cartList.appendChild(li);
+        });
 
+        document.getElementById("cart-total").textContent = 
+            "R$ " + cartTotal.toLocaleString('pt-BR');
+    }
 
-
-
-
-
-
+    function checkout() {
+        if (cartItems.length === 0) {
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+        alert(`✅ Compra finalizada!\nItens: ${cartCount}\nTotal: R$ ${cartTotal.toLocaleString('pt-BR')}`);
+        
+        // Limpar carrinho
+        cartCount = 0;
+        cartItems = [];
+        cartTotal = 0;
+        document.getElementById("cart-count").textContent = cartCount;
+        updateCart();
+    }
+</script>
 
 </body>
 </html>
-
-
-
-
 
 
 
