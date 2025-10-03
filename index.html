@@ -7,14 +7,31 @@
     <style>
         /* ===== Reset e estilo base ===== */
         body {
-            font-family: Arial, sans-serif;  
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: #111;
             color: #fff;
         }
+
+        /* ----- VÍDEO DE FUNDO ----- */
+        #video-de-fundo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            /* Adiciona uma camada de escurecimento para melhorar a legibilidade do texto */
+            filter: brightness(60%);
+        }
+
+        /* ===== Estilo do Cabeçalho e outros elementos ===== */
         header {
-            background: #000;
+            background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
             padding: 10px 20px;
             display: flex;
             align-items: center;
@@ -38,10 +55,9 @@
             text-decoration: none;
             font-weight: bold;
         }
-        #banner img {
-            width: 100%;
-            height: auto;
-            display: block;
+        /* Remove o banner de imagem para o vídeo ocupar o espaço */
+        #banner {
+            display: none;
         }
 
         /* ===== Grid de modelos ===== */
@@ -50,6 +66,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             padding: 40px;
+            background: rgba(17, 17, 17, 0.8); /* Fundo semi-transparente */
         }
         .card {
             background: #1a1a1a;
@@ -159,6 +176,21 @@
             text-decoration: none;
         }
 
+        /* ===== Seções de conteúdo ===== */
+        #bem-vindo,
+        #test-drive,
+        #localizacao,
+        #contato,
+        #personalizacao {
+            position: relative; /* Para que o z-index funcione */
+            z-index: 1; /* Para ficarem acima do vídeo */
+            background: rgba(17, 17, 17, 0.8); /* Fundo semi-transparente para o texto */
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
         /* ===== Tela inicial Triumph ===== */
         #splash-screen {
             position: fixed;
@@ -183,35 +215,262 @@
             100% { opacity: 0; transform: scale(1.2); }
         }
 
-        /* ===== Teste Drive ===== */
-        #test-drive {
-            padding: 40px;
-            text-align: center;
-            background: #111;
-        }
-        #test-drive a {
-            font-size: 18px;
-            padding: 12px 24px;
-        }
-
         /* ===== Localização ===== */
-        #localizacao {
-            padding: 40px;
-            text-align: center;
-            background: #111;
-            color: #fff;
-        }
         #localizacao iframe {
             width: 100%;
             height: 400px;
             border: 0;
             margin-top: 20px;
         }
+
+        /* ===== Contato ===== */
+        .contato-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Triumph Motorcycles - Loja Oficial</title>
+    <style>
+        /* ===== Reset e estilo base ===== */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: #fff;
+        }
+
+        /* ----- VÍDEO DE FUNDO ----- */
+        #video-de-fundo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(60%);
+        }
+
+        /* ===== Estilo do Cabeçalho e outros elementos ===== */
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header img {
+            height: 50px;
+        }
+        nav ol {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        nav ol li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #banner {
+            display: none;
+        }
+
+        /* ===== Grid de modelos ===== */
+        .modelos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: rgba(17, 17, 17, 0.8);
+        }
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .card h3 {
+            margin: 10px 0 5px;
+            color: #ffcc00;
+        }
+        .price {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #0f0;
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #ffaa00;
+        }
+
+        /* ===== Carrinho ===== */
+        #cart {
+            background: #222;
+            padding: 10px;
+            border-radius: 8px;
+            margin-right: 20px;
+            min-width: 250px;
+        }
+        #cart h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #ffcc00;
+        }
+        #cart ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px;
+            font-size: 14px;
+        }
+        #cart ul li {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cart ul li button {
+            background: red;
+            border: none;
+            color: white;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+        #cart-total {
+            font-weight: bold;
+            color: #0f0;
+        }
+        #checkout-btn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #checkout-btn:hover {
+            background: #ffaa00;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        /* ===== Seções de conteúdo ===== */
+        #bem-vindo,
+        #test-drive,
+        #localizacao,
+        #contato,
+        #personalizacao {
+            position: relative;
+            z-index: 1;
+            background: rgba(17, 17, 17, 0.8);
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        /* ===== Tela inicial Triumph ===== */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            transition: opacity 0.5s;
+        }
+        #splash-screen .splash-content img {
+            width: 250px;
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.2); }
+        }
+
+        /* ===== Localização ===== */
+        #localizacao iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            margin-top: 20px;
+        }
+
+        /* ===== Contato ===== */
+        .contato-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
 
-<!-- ===== Tela inicial ===== -->
+<video autoplay muted loop playsinline id="video-de-fundo">
+    <source src="video-da-triumph.mp4" type="video/mp4">
+    Seu navegador não suporta a tag de vídeo.
+</video>
+
 <div id="splash-screen">
     <div class="splash-content">
         <img src="img13.png" alt="Triumph Logo">
@@ -219,9 +478,8 @@
 </div>
 
 <header>
-    <img src="img4.png" alt="Triumph">
+    <img src="img14.png" alt="Triumph">
 
-    <!-- Carrinho -->
     <div id="cart">
         <h3>Carrinho 🛒 (<span id="cart-count">0</span>)</h3>
         <ul id="cart-items"></ul>
@@ -231,122 +489,137 @@
 
     <nav>
         <ol>
-            <li><a href="#banner">Home</a></li>
+            <li><a href="#bem-vindo">Home</a></li>
             <li><a href="#modelos">Modelos</a></li>
             <li><a href="#test-drive">Teste Drive</a></li>
             <li><a href="#localizacao">Localização</a></li>
             <li><a href="#contato">Contato</a></li>
+            <li><a href="#personalizacao">Personalização</a></li>
         </ol>
     </nav>
 </header>
 
-<!-- ===== Banner ===== -->
-<section id="banner">
-    <img src="2020-triumph-tiger-900-gt-pro-review-adv-motorcycle-1.jpg" alt="">
-</section>
+<main>
+    <section id="bem-vindo">
+        <h1>Seja Bem-vindo à Triumph!</h1>
+        <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto;">
+            A loja oficial de motos de luxo e esportivas. Explore nossos modelos exclusivos e sinta a emoção de pilotar uma Triumph.
+        </p>
+        <img src="img14.png" alt="Logo Triumph" style="width: 200px; margin-top: 20px;">
+    </section>
 
-<!-- ===== Seção de Boas-Vindas ===== -->
-<section id="bem-vindo" style="padding: 60px 20px; text-align: center; background: #111; color: #ffcc00;">
-    <h1>Seja Bem-vindo à Triumph!</h1>
-    <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto;">
-        A loja oficial de motos de luxo e esportivas. Explore nossos modelos exclusivos e sinta a emoção de pilotar uma Triumph.
-    </p>
-    <img src="img13.png" alt="Logo Triumph" style="width: 200px; margin-top: 20px;">
-</section>
+    <section id="modelos" class="modelos">
+        <div class="card">
+            <img src="img5.png" alt="Tiger Sport">
+            <h3>Tiger Sport</h3>
+            <p>Compacta, ágil e divertida para o dia a dia urbano.</p>
+            <p class="price">R$ 69.190,00</p>
+            <button class="btn" onclick="addToCart('Tiger Sport', 69190)">Comprar</button>
+        </div>
+        <div class="card">
+            <img src="img7.png" alt="Tiger 1200">
+            <h3>Tiger 1200</h3>
+            <p>Naked esportiva, leve, ágil e feita para diversão nas ruas.</p>
+            <p class="price">R$ 88.990</p>
+            <button class="btn" onclick="addToCart('Tiger 1200', 88990)">Comprar</button>
+        </div>
+        <div class="card">
+            <img src="img1.png" alt="Tiger 900 GT">
+            <h3>Tiger 900 GT</h3>
+            <p>Aventureira e confortável, feita para longas viagens.</p>
+            <p class="price">R$ 81.690,00</p>
+            <button class="btn" onclick="addToCart('Tiger 900 GT', 81690)">Comprar</button>
+        </div>
+        <div class="card">
+            <img src="img6.png" alt="Bonneville Bobber">
+            <h3>Bonneville Bobber</h3>
+            <p>Estilo clássico, torque elevado e design retrô moderno.</p>
+            <p class="price">R$ 67.890,00</p>
+            <button class="btn" onclick="addToCart('Bonneville Bobber', 67890)">Comprar</button>
+        </div>
+        <div class="card">
+            <img src="img3.png" alt="Tiger 900 Rally Pro">
+            <h3>Tiger 900 Rally Pro</h3>
+            <p>Preparada para off-road extremo, com potência e resistência.</p>
+            <p class="price">R$ 85.690,00</p>
+            <button class="btn" onclick="addToCart('Tiger 900 Rally Pro', 85690)">Comprar</button>
+        </div>
+    </section>
 
+    <section id="test-drive">
+        <h2>🚀 Agende seu Teste Drive</h2>
+        <p>Escolha seu modelo e agende um test ride na loja Triumph mais próxima!</p>
+        <a href="https://www.triumphmotorcycles.com.br/test-drive" target="_blank" class="btn">Agendar Teste Drive</a>
+    </section>
 
+    <section id="personalizacao">
+        <h2>🎨 Personalize Sua Moto</h2>
+        <p>Escolha o modelo, cor e acessórios para deixar sua Triumph do jeito que você quiser.</p>
 
+        <form id="customize-form">
+            <label for="modelo-custom">Modelo:</label>
+            <select id="modelo-custom" required>
+                <option value="Tiger Sport">Tiger Sport</option>
+                <option value="Tiger 1200">Tiger 1200</option>
+                <option value="Tiger 900 GT">Tiger 900 GT</option>
+                <option value="Bonneville Bobber">Bonneville Bobber</option>
+                <option value="Tiger 900 Rally Pro">Tiger 900 Rally Pro</option>
+            </select>
 
+            <label for="cor-custom">Cor:</label>
+            <select id="cor-custom" required>
+                <option value="Preta">Preta</option>
+                <option value="Vermelha">Vermelha</option>
+                <option value="Branca">Branca</option>
+                <option value="Azul">Azul</option>
+                <option value="Amarela">Amarela</option>
+            </select>
 
+            <label for="acessorios-custom">Acessórios:</label>
+            <select id="acessorios-custom" required>
+                <option value="Nenhum">Nenhum</option>
+                <option value="Bagageiro">Bagageiro</option>
+                <option value="Protetor de Motor">Protetor de Motor</option>
+                <option value="Assento Conforto">Assento Conforto</option>
+            </select>
 
+            <p style="margin-top: 20px;">
+                <button type="button" class="btn" onclick="addCustomToCart()">Adicionar ao Carrinho</button>
+            </p>
+        </form>
+    </section>
 
-<!-- ===== Modelos ===== -->
-<section id="modelos" class="modelos">
-    <div class="card">
-        <img src="img5.png" alt="Tiger Sport">
-        <h3>Tiger Sport</h3>
-        <p>Compacta, ágil e divertida para o dia a dia urbano.</p>
-        <p class="price">R$ 47.900</p>
-        <button class="btn" onclick="addToCart('Tiger Sport', 47900)">Comprar</button>
-    </div>
-    <div class="card">
-        <img src="img7.png" alt="Tiger 1200">
-        <h3>Tiger 1200</h3>
-        <p>Naked esportiva, leve, ágil e feita para diversão nas ruas.</p>
-        <p class="price">R$ 64.900</p>
-        <button class="btn" onclick="addToCart('Tiger 1200', 64900)">Comprar</button>
-    </div>
-    <div class="card">
-        <img src="img1.png" alt="Tiger 900 GT">
-        <h3>Tiger 900 GT</h3>
-        <p>Aventureira e confortável, feita para longas viagens.</p>
-        <p class="price">R$ 75.900</p>
-        <button class="btn" onclick="addToCart('Tiger 900 GT', 75900)">Comprar</button>
-    </div>
-    <div class="card">
-        <img src="img6.png" alt="Bonneville Bobber">
-        <h3>Bonneville Bobber</h3>
-        <p>Estilo clássico, torque elevado e design retrô moderno.</p>
-        <p class="price">R$ 79.900</p>
-        <button class="btn" onclick="addToCart('Bonneville Bobber', 79900)">Comprar</button>
-    </div>
-    <div class="card">
-        <img src="img3.png" alt="Tiger 900 Rally Pro">
-        <h3>Tiger 900 Rally Pro</h3>
-        <p>Preparada para off-road extremo, com potência e resistência.</p>
-        <p class="price">R$ 82.500</p>
-        <button class="btn" onclick="addToCart('Tiger 900 Rally Pro', 82500)">Comprar</button>
-    </div>
-</section>
+    <section id="localizacao">
+        <h2>📍 Nossa Localização</h2>
+        <p>Venha visitar nossa loja oficial Triumph Motorcycles em São Paulo, SP:</p>
+        <p><strong>Endereço:</strong> Avenida Paulista, 1578 - Bela Vista, São Paulo - SP, 01310-200</p>
 
-<!-- ===== Teste Drive ===== -->
-<section id="test-drive">
-    <h2>🚀 Agende seu Teste Drive</h2>
-    <p>Escolha seu modelo e agende um test ride na loja Triumph mais próxima!</p>
-    <a href="https://www.triumphmotorcycles.com.br/test-drive" target="_blank" class="btn">Agendar Teste Drive</a>
-</section>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.297180321652!2d-46.65575068443865!3d-23.56516998467642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c9eb7fcd65%3A0xf3c8f2276db4b0a6!2sAvenida%20Paulista%2C%201578%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-200!5e0!3m2!1spt-BR!2sbr!4v1695767890123!5m2!1spt-BR!2sbr"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
 
-<!-- ===== Localização ===== -->
-<section id="localizacao">
-    <h2>📍 Nossa Localização</h2>
-    <p>Venha visitar nossa loja oficial Triumph Motorcycles em São Paulo, SP:</p>
-    <p><strong>Endereço:</strong> Avenida Paulista, 1578 - Bela Vista, São Paulo - SP, 01310-200</p>
+    <section id="contato">
+        <h2>Entre em Contato</h2>
+        <div class="contato-container">
+            <div class="contato-item">
+                📧 <strong>Email:</strong> contato@triumph.com.br
+            </div>
+            <div class="contato-item">
+                📞 <strong>Telefone:</strong> (11) 99999-9999
+            </div>
+            <div class="contato-item">
+                📍 <strong>Endereço:</strong> Av. Paulista, 1000 - São Paulo/SP
+            </div>
+        </div>
+    </section>
+</main>
 
-    <!-- Google Maps -->
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.297180321652!2d-46.65575068443865!3d-23.56516998467642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c9eb7fcd65%3A0xf3c8f2276db4b0a6!2sAvenida%20Paulista%2C%201578%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-200!5e0!3m2!1spt-BR!2sbr!4v1695767890123!5m2!1spt-BR!2sbr"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-</section>
-
-<!-- ===== Contato ===== -->
-<footer id="contato">
-    <h2>📞 Entre em Contato</h2>
-    <p>Preencha o formulário abaixo e retornaremos em breve:</p>
-
-    <form id="contact-form">
-        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-        <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
-        <textarea id="mensagem" name="mensagem" placeholder="Sua mensagem" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-
-    <h3>📲 Atendimento via WhatsApp</h3>
-    <a href="https://wa.me/112304759829?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20as%20motos%20Triumph!" 
-       target="_blank" 
-       class="btn">💬 Falar no WhatsApp</a>
-
-    <h3>📧 Outros contatos</h3>
-    <p>Email: <a href="mailto:contato@triumphbrasil.com">contato@triumphbrasil.com</a></p>
-    <p>Telefone: <a href="tel:+5520304506">(11) 264832-27485</a></p>
-
-    <p>🌐 Acesse também o site oficial: 
-        <a href="https://www.triumphmotorcycles.com.br" target="_blank">Triumph Motorcycles Brasil</a>
-    </p>
-
-    <p>© 2025 Triumph Motorcycles Brasil</p>
+<footer>
+    <p>© 2025 Triumph Motorcycles. Todos os direitos reservados.</p>
 </footer>
 
 <script>
@@ -402,58 +675,14 @@
         document.getElementById("cart-count").textContent = cartCount;
         updateCart();
     }
-</script>
 
-</body>
-</html>
-
-
-<!-- ===== Personalização de Motos ===== -->
-<section id="personalizacao" style="padding: 40px; background: #111; color: #fff; text-align: center;">
-    <h2>🎨 Personalize Sua Moto</h2>
-    <p>Escolha o modelo, cor e acessórios para deixar sua Triumph do jeito que você quiser.</p>
-
-    <form id="customize-form">
-        <label for="modelo-custom">Modelo:</label>
-        <select id="modelo-custom" required>
-            <option value="Tiger Sport">Tiger Sport</option>
-            <option value="Tiger 1200">Tiger 1200</option>
-            <option value="Tiger 900 GT">Tiger 900 GT</option>
-            <option value="Bonneville Bobber">Bonneville Bobber</option>
-            <option value="Tiger 900 Rally Pro">Tiger 900 Rally Pro</option>
-        </select>
-
-        <label for="cor-custom">Cor:</label>
-        <select id="cor-custom" required>
-            <option value="Preta">Preta</option>
-            <option value="Vermelha">Vermelha</option>
-            <option value="Branca">Branca</option>
-            <option value="Azul">Azul</option>
-            <option value="Amarela">Amarela</option>
-        </select>
-
-        <label for="acessorios-custom">Acessórios:</label>
-        <select id="acessorios-custom" required>
-            <option value="Nenhum">Nenhum</option>
-            <option value="Bagageiro">Bagageiro</option>
-            <option value="Protetor de Motor">Protetor de Motor</option>
-            <option value="Assento Conforto">Assento Conforto</option>
-        </select>
-
-        <p style="margin-top: 20px;">
-            <button type="button" class="btn" onclick="addCustomToCart()">Adicionar ao Carrinho</button>
-        </p>
-    </form>
-</section>
-
-<script>
-    // Preços base dos modelos
+    // ===== Personalização de Motos =====
     const modeloPreco = {
-        "Tiger Sport": 47900,
-        "Tiger 1200": 64900,
-        "Tiger 900 GT": 75900,
-        "Bonneville Bobber": 79900,
-        "Tiger 900 Rally Pro": 82500
+        "Tiger Sport": 69190,
+        "Tiger 1200": 88990,
+        "Tiger 900 GT": 81690,
+        "Bonneville Bobber": 67890,
+        "Tiger 900 Rally Pro": 85690
     };
 
     function addCustomToCart() {
@@ -462,25 +691,15 @@
         const acessorios = document.getElementById('acessorios-custom').value;
 
         let preco = modeloPreco[modelo];
-        // Acrescenta preço dos acessórios se houver
         if(acessorios !== "Nenhum") preco += 1500;
 
-        // Monta nome do item personalizado
         let itemNome = `${modelo} - Cor: ${cor} - Acessórios: ${acessorios}`;
 
         addToCart(itemNome, preco);
 
         alert(`✅ ${itemNome} adicionado ao carrinho! Preço: R$ ${preco.toLocaleString('pt-BR')}`);
     }
-</script>      
+</script>
 
-
-
-<style>
-  body {
-    background-image: url('img13.png');
-    background-size: cover; /* This makes the background image cover the entire element */
-    background-position: center; /* This centers the image in the element */
-    background-repeat: no-repeat; /* This prevents the image from repeating */
-  }
-</style>
+</body>
+</html>
